@@ -60,8 +60,9 @@
     bool better_dragscroll_dragaction_enabled = 0;
     float dragscroll_acc_h = 0;
     float dragscroll_acc_v = 0;
-    bool m3_scroll_waiting = false;
-    bool m3_scroll_started_drag = false;
+    bool m3_scroll_pressed = false;
+    bool m3_scroll_dragging = false;
+    int16_t m3_scroll_acc = 0;
 
     void better_dragscroll_resetacc(void){
         dragscroll_acc_h = 0;
@@ -101,16 +102,16 @@
                 return false;
             case BETTER_DRAG_SCROLL_M3:
                 if (record->event.pressed) {
-                    m3_scroll_waiting = true;
-                    m3_scroll_started_drag = false;
+                    m3_scroll_pressed = true;
+                    m3_scroll_dragging = false;
+                    m3_scroll_acc = 0;
                 } else {
-                    if (m3_scroll_started_drag) {
+                    m3_scroll_pressed = false;
+                    if (m3_scroll_dragging) {
                         better_dragscroll_momentary(false);
                     } else {
                         tap_code16(MS_BTN3);
                     }
-                    m3_scroll_waiting = false;
-                    m3_scroll_started_drag = false;
                 }
                 return false;
             case BETTER_DRAG_ACTION_A_MOMENTARY:
@@ -205,11 +206,13 @@
             #endif // BETTER_DRAGSCROLL_POINTERINVERT_Y
         #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
-        if (m3_scroll_waiting && ((abs(mouse_report.x) + abs(mouse_report.y)) > M3_SCROLL_DEADZONE)) {
-            m3_scroll_waiting = false;
-            m3_scroll_started_drag = true;
-            if (!better_dragscroll_enabled_bypress) {
-                better_dragscroll_momentary(true);
+        if (m3_scroll_pressed) {
+            m3_scroll_acc += abs(mouse_report.x) + abs(mouse_report.y);
+            if (!m3_scroll_dragging && m3_scroll_acc > M3_SCROLL_DEADZONE) {
+                m3_scroll_dragging = true;
+                if (!better_dragscroll_enabled_bypress) {
+                    better_dragscroll_momentary(true);
+                }
             }
         }
 
