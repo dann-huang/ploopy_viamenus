@@ -106,7 +106,7 @@
                             better_dragscroll_momentary(false);
                         }
                     } else {
-                        tap_code16(KC_MS_BTN3);
+                        tap_code16(MS_BTN3);
                     }
                     m3_scroll_waiting = false;
                     m3_scroll_started_drag = false;
