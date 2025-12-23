@@ -39,6 +39,11 @@
         #endif
     #endif
 
+    #if !defined(M3_SCROLL_DEADZONE)
+        // 50 counts @1600 CPI ≈ 1/32 inch of ball travel; adjust to taste.
+        #define M3_SCROLL_DEADZONE 50
+    #endif
+
     int8_t drgstraight_history_x[SCROLL_HISTORY_SIZE];
     int8_t drgstraight_history_y[SCROLL_HISTORY_SIZE];
     uint16_t drgstraight_history_time[SCROLL_HISTORY_SIZE];
@@ -57,7 +62,6 @@
     float dragscroll_acc_v = 0;
     bool m3_scroll_waiting = false;
     bool m3_scroll_started_drag = false;
-    bool m3_scroll_prev_drag_enabled = false;
 
     void better_dragscroll_resetacc(void){
         dragscroll_acc_h = 0;
@@ -99,12 +103,9 @@
                 if (record->event.pressed) {
                     m3_scroll_waiting = true;
                     m3_scroll_started_drag = false;
-                    m3_scroll_prev_drag_enabled = better_dragscroll_enabled_bypress;
                 } else {
                     if (m3_scroll_started_drag) {
-                        if (!m3_scroll_prev_drag_enabled) {
-                            better_dragscroll_momentary(false);
-                        }
+                        better_dragscroll_momentary(false);
                     } else {
                         tap_code16(MS_BTN3);
                     }
@@ -204,7 +205,7 @@
             #endif // BETTER_DRAGSCROLL_POINTERINVERT_Y
         #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
-        if (m3_scroll_waiting && (mouse_report.x != 0 || mouse_report.y != 0)) {
+        if (m3_scroll_waiting && ((abs(mouse_report.x) + abs(mouse_report.y)) > M3_SCROLL_DEADZONE)) {
             m3_scroll_waiting = false;
             m3_scroll_started_drag = true;
             if (!better_dragscroll_enabled_bypress) {
