@@ -55,6 +55,9 @@
     bool better_dragscroll_dragaction_enabled = 0;
     float dragscroll_acc_h = 0;
     float dragscroll_acc_v = 0;
+    bool m3_scroll_waiting = false;
+    bool m3_scroll_started_drag = false;
+    bool m3_scroll_prev_drag_enabled = false;
 
     void better_dragscroll_resetacc(void){
         dragscroll_acc_h = 0;
@@ -91,6 +94,23 @@
                 return false;
             case BETTER_DRAG_SCROLL_TOGGLE:
                 better_dragscroll_toggle(record->event.pressed);
+                return false;
+            case BETTER_DRAG_SCROLL_M3:
+                if (record->event.pressed) {
+                    m3_scroll_waiting = true;
+                    m3_scroll_started_drag = false;
+                    m3_scroll_prev_drag_enabled = better_dragscroll_enabled_bypress;
+                } else {
+                    if (m3_scroll_started_drag) {
+                        if (!m3_scroll_prev_drag_enabled) {
+                            better_dragscroll_momentary(false);
+                        }
+                    } else {
+                        tap_code16(KC_MS_BTN3);
+                    }
+                    m3_scroll_waiting = false;
+                    m3_scroll_started_drag = false;
+                }
                 return false;
             case BETTER_DRAG_ACTION_A_MOMENTARY:
             case BETTER_DRAG_ACTION_B_MOMENTARY:
@@ -183,6 +203,14 @@
                 mouse_report.y = -mouse_report.y;
             #endif // BETTER_DRAGSCROLL_POINTERINVERT_Y
         #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+
+        if (m3_scroll_waiting && (mouse_report.x != 0 || mouse_report.y != 0)) {
+            m3_scroll_waiting = false;
+            m3_scroll_started_drag = true;
+            if (!better_dragscroll_enabled_bypress) {
+                better_dragscroll_momentary(true);
+            }
+        }
 
         if (better_dragscroll_enabled_bylock || better_dragscroll_enabled_bypress) {
 
