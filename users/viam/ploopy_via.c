@@ -210,6 +210,10 @@
                 ploopyvia_config.dragscroll_straighten_sensitivity = *value_data;
                 dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
                 break;
+            case id_ploopystuff_dragscroll_m3_deadzone:
+                ploopyvia_config.dragscroll_m3_deadzone = *value_data;
+                dprintf("dragscroll_m3_deadzone: %d\n", ploopyvia_config.dragscroll_m3_deadzone);
+                break;
 
             case id_ploopystuff_dragscroll_dragact_a_up:
                 ploopyvia_config.dragscroll_dragact_a_up = value_data[0] << 8 | value_data[1];
@@ -374,6 +378,10 @@
             case id_ploopystuff_dragscroll_straighten_sensitivity:
                 *value_data = ploopyvia_config.dragscroll_straighten_sensitivity;
                 dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
+                break;
+            case id_ploopystuff_dragscroll_m3_deadzone:
+                *value_data = ploopyvia_config.dragscroll_m3_deadzone;
+                dprintf("dragscroll_m3_deadzone: %d\n", ploopyvia_config.dragscroll_m3_deadzone);
                 break;
 
 

@@ -30,6 +30,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_sniper_a_dpi = 41,
     id_ploopystuff_sniper_b_dpi,
     id_ploopystuff_dragscroll_straighten_sensitivity = 51,
+    id_ploopystuff_dragscroll_m3_deadzone,
     id_ploopystuff_dragscroll_dragact_a_up = 61,
     id_ploopystuff_dragscroll_dragact_a_down,
     id_ploopystuff_dragscroll_dragact_a_left,
@@ -61,6 +62,7 @@ typedef struct {
     uint16_t sniper_a_dpi;
     uint16_t sniper_b_dpi;
     uint8_t  dragscroll_straighten_sensitivity;
+    uint8_t  dragscroll_m3_deadzone;
     uint16_t dragscroll_dragact_a_up;
     uint16_t dragscroll_dragact_a_down;
     uint16_t dragscroll_dragact_a_left;
@@ -125,6 +127,7 @@ static via_ploopystuff_config ploopyvia_config_default = {
     .sniper_a_dpi               = 100,
     .sniper_b_dpi               = 200,
     .dragscroll_straighten_sensitivity = 0,
+    .dragscroll_m3_deadzone     = 3,
     .dragscroll_dragact_a_up    = KC_VOLU,
     .dragscroll_dragact_a_down  = KC_VOLD,
     .dragscroll_dragact_a_left  = KC_NO,

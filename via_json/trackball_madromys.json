@@ -100,6 +100,21 @@
                             "content": ["id_ploopystuff_dpi_multiplier", 0, 2]
                         },
                         {
+                            "label": "M3 Dragscroll Deadzone",
+                            "type": "dropdown",
+                            "options": [
+                                ["0", 0],
+                                ["3", 3],
+                                ["6", 6],
+                                ["9", 9],
+                                ["12", 12],
+                                ["15", 15],
+                                ["18", 18],
+                                ["21", 21]
+                            ],
+                            "content": ["id_ploopystuff_dragscroll_m3_deadzone", 0, 52]
+                        },
+                        {
                             "label": "Mouse Jiggler",
                             "type": "toggle",
                             "content": ["id_ploopystuff_msjiggler_enabled", 0, 3]

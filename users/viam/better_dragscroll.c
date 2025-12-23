@@ -40,8 +40,7 @@
     #endif
 
     #if !defined(M3_SCROLL_DEADZONE)
-        // 50 counts @1600 CPI ≈ 1/32 inch of ball travel; adjust to taste.
-        #define M3_SCROLL_DEADZONE 50
+        #define M3_SCROLL_DEADZONE 3
     #endif
 
     int8_t drgstraight_history_x[SCROLL_HISTORY_SIZE];
@@ -63,6 +62,13 @@
     bool m3_scroll_pressed = false;
     bool m3_scroll_dragging = false;
     int16_t m3_scroll_acc = 0;
+    static inline uint16_t m3_scroll_deadzone(void) {
+        #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+            return ploopyvia_config.dragscroll_m3_deadzone;
+        #else
+            return M3_SCROLL_DEADZONE;
+        #endif
+    }
 
     void better_dragscroll_resetacc(void){
         dragscroll_acc_h = 0;
@@ -208,7 +214,7 @@
 
         if (m3_scroll_pressed) {
             m3_scroll_acc += abs(mouse_report.x) + abs(mouse_report.y);
-            if (!m3_scroll_dragging && m3_scroll_acc > M3_SCROLL_DEADZONE) {
+            if (!m3_scroll_dragging && m3_scroll_acc > m3_scroll_deadzone()) {
                 m3_scroll_dragging = true;
                 if (!better_dragscroll_enabled_bypress) {
                     better_dragscroll_momentary(true);
