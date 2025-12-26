@@ -21,6 +21,10 @@
         for (int i=0; i<5; i++){
             dpi_array[i] = ploopyvia_config.dpi_presets[i];
         }
+        uint8_t limit = ploopyvia_config.dpi_cycle_count;
+        if (keyboard_config.dpi_config > limit){
+            keyboard_config.dpi_config = 0;
+        }
         pointing_device_set_cpi(dpi_array[keyboard_config.dpi_config]);
         dprintf("Set CPI %d\n", dpi_array[keyboard_config.dpi_config]);
         eeconfig_update_kb(keyboard_config.raw);
@@ -118,6 +122,11 @@
                 dprintf("pointer_invert_v:%d\n", ploopyvia_config.pointer_invert_v);
                 break;
 
+            case id_ploopystuff_dpi_cycle_count:
+                ploopyvia_config.dpi_cycle_count = *value_data;
+                dprintf("dpi_cycle_count:%d\n", ploopyvia_config.dpi_cycle_count);
+                break;
+
             case id_ploopystuff_gesture_count:
                 ploopyvia_config.gesture_count = *value_data;
                 ploopy_msGestureUpdate();
@@ -210,6 +219,7 @@
                 ploopyvia_config.dragscroll_straighten_sensitivity = *value_data;
                 dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
                 break;
+
             case id_ploopystuff_dragscroll_m3_deadzone:
                 ploopyvia_config.dragscroll_m3_deadzone = *value_data;
                 dprintf("dragscroll_m3_deadzone: %d\n", ploopyvia_config.dragscroll_m3_deadzone);
@@ -293,6 +303,11 @@
             case id_ploopystuff_pointer_invert_v:
                 *value_data = ploopyvia_config.pointer_invert_v;
                 dprintf("pointer_invert_v:%d\n", ploopyvia_config.pointer_invert_v);
+                break;
+
+            case id_ploopystuff_dpi_cycle_count:
+                *value_data = ploopyvia_config.dpi_cycle_count;
+                dprintf("dpi_cycle_count:%d\n", ploopyvia_config.dpi_cycle_count);
                 break;
 
             case id_ploopystuff_gesture_count:
@@ -379,11 +394,11 @@
                 *value_data = ploopyvia_config.dragscroll_straighten_sensitivity;
                 dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
                 break;
+
             case id_ploopystuff_dragscroll_m3_deadzone:
                 *value_data = ploopyvia_config.dragscroll_m3_deadzone;
                 dprintf("dragscroll_m3_deadzone: %d\n", ploopyvia_config.dragscroll_m3_deadzone);
                 break;
-
 
             case id_ploopystuff_dragscroll_dragact_a_up:
                 value_data[0] = ploopyvia_config.dragscroll_dragact_a_up >> 8;

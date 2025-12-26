@@ -13,6 +13,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_msjiggler_enabled,
     id_ploopystuff_pointer_invert_h,
     id_ploopystuff_pointer_invert_v,
+    id_ploopystuff_dpi_cycle_count,
     id_ploopystuff_gesture_count = 11,
     id_ploopystuff_gesture_action_h,
     id_ploopystuff_gesture_action_v,
@@ -71,6 +72,7 @@ typedef struct {
     uint16_t dragscroll_dragact_b_down;
     uint16_t dragscroll_dragact_b_left;
     uint16_t dragscroll_dragact_b_right;
+    uint8_t  dpi_cycle_count;
 } via_ploopystuff_config;
 
 via_ploopystuff_config ploopyvia_config;
@@ -136,4 +138,5 @@ static via_ploopystuff_config ploopyvia_config_default = {
     .dragscroll_dragact_b_down  = KC_NO,
     .dragscroll_dragact_b_left  = KC_NO,
     .dragscroll_dragact_b_right = KC_NO,
+    .dpi_cycle_count            = 5,
 };

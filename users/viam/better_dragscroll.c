@@ -216,9 +216,7 @@
             m3_scroll_acc += abs(mouse_report.x) + abs(mouse_report.y);
             if (!m3_scroll_dragging && m3_scroll_acc > m3_scroll_deadzone()) {
                 m3_scroll_dragging = true;
-                if (!better_dragscroll_enabled_bypress) {
-                    better_dragscroll_momentary(true);
-                }
+                better_dragscroll_momentary(true);
             }
         }
 

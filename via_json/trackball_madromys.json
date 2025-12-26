@@ -81,6 +81,17 @@
                             "content": ["id_ploopystuff_dpi_activepreset", 0, 1]
                         },
                         {
+                            "label": "DPI Cycle Count",
+                            "type": "dropdown",
+                            "options": [
+                                ["2", 2],
+                                ["3", 3],
+                                ["4", 4],
+                                ["5", 5]
+                            ],
+                            "content": ["id_ploopystuff_dpi_cycle_count", 0, 6]
+                        },
+                        {
                             "label": "DPI Multiplier",
                             "type": "dropdown",
                             "options": [
@@ -98,21 +109,6 @@
                                 ["5x", 100]
                             ],
                             "content": ["id_ploopystuff_dpi_multiplier", 0, 2]
-                        },
-                        {
-                            "label": "M3 Dragscroll Deadzone",
-                            "type": "dropdown",
-                            "options": [
-                                ["0", 0],
-                                ["3", 3],
-                                ["6", 6],
-                                ["9", 9],
-                                ["12", 12],
-                                ["15", 15],
-                                ["18", 18],
-                                ["21", 21]
-                            ],
-                            "content": ["id_ploopystuff_dragscroll_m3_deadzone", 0, 52]
                         },
                         {
                             "label": "Mouse Jiggler",
@@ -260,6 +256,20 @@
                                 ["100%", 100]
                             ],
                             "content": ["id_ploopystuff_dragscroll_straighten_enabled", 0, 51]
+                        },
+                        {
+                            "label": "M3 Dragscroll Deadzone",
+                            "type": "dropdown",
+                            "options": [
+                                ["0", 0],
+                                ["1", 1],
+                                ["2", 2],
+                                ["3", 3],
+                                ["5", 5],
+                                ["7", 7],
+                                ["10", 10]
+                            ],
+                            "content": ["id_ploopystuff_dragscroll_m3_deadzone", 0, 52]
                         }
                     ]
                 },
