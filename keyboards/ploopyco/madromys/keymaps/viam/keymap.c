@@ -64,16 +64,16 @@ enum {
 #define P_MS5FB LT(_FNB, MS_BTN5)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT(
-        P_M3SC, P_MS5FB, P_MS4FA, MS_BTN1,
-        MS_BTN2,                   MS_BTN3
+    [_BASE] = LAYOUT( 
+        P_M3SC,  P_SNMOA, P_MS4FA, MS_BTN1,
+        MS_BTN2,                   P_MS5FB
     ),
     [_FNA] = LAYOUT(
-        P_DRGTG, _______, _______, _______,
-        _______,                   _______
+        KC_MUTE, KC_VOLU, KC_NO,   KC_VOLD,
+        P_DRGAA,                   KC_MPLY
     ),
     [_FNB] = LAYOUT(
-        P_SNTGB, _______, _______, _______,
-        _______,                   DPI_CONFIG
-    )
+        _______, _______, _______, _______,
+        P_DPI,                     KC_NO
+    ),
 };

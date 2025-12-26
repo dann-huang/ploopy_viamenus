@@ -13,7 +13,7 @@
 #endif
 
 #if !defined(BETTER_DRAGSCROLL_DRAGACTION_DIVISOR)
-    #define BETTER_DRAGSCROLL_DRAGACTION_DIVISOR 2
+    #define BETTER_DRAGSCROLL_DRAGACTION_DIVISOR 4
 #endif
 
 bool better_dragscroll_enabled_bylock;
