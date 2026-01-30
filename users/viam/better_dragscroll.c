@@ -62,6 +62,7 @@
     bool m3_scroll_pressed = false;
     bool m3_scroll_dragging = false;
     int16_t m3_scroll_acc = 0;
+    bool m3_scroll_simple = false;
     static inline uint16_t m3_scroll_deadzone(void) {
         #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
             return ploopyvia_config.dragscroll_m3_deadzone;
@@ -107,6 +108,15 @@
                 better_dragscroll_toggle(record->event.pressed);
                 return false;
             case BETTER_DRAG_SCROLL_M3:
+                if (m3_scroll_simple) {
+                    if (record->event.pressed) {
+                        register_code16(MS_BTN3);
+                    } else {
+                        unregister_code16(MS_BTN3);
+                    }
+                    return false;
+                }
+
                 if (record->event.pressed) {
                     m3_scroll_pressed = true;
                     m3_scroll_dragging = false;
@@ -118,6 +128,11 @@
                     } else {
                         tap_code16(MS_BTN3);
                     }
+                }
+                return false;
+            case BETTER_DRAG_SCROLL_M3_TOGGLE:
+                if (record->event.pressed) {
+                    m3_scroll_simple ^= 1;
                 }
                 return false;
             case BETTER_DRAG_ACTION_A_MOMENTARY:

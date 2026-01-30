@@ -40,6 +40,7 @@ enum keymap_keycodes {
     BETTER_DRAG_ACTION_A_MOMENTARY,
     BETTER_DRAG_ACTION_B_MOMENTARY,
     BETTER_DRAG_SCROLL_M3,
+    BETTER_DRAG_SCROLL_M3_TOGGLE,
 };
 
 enum {
@@ -59,6 +60,7 @@ enum {
 #define P_DRGAA BETTER_DRAG_ACTION_A_MOMENTARY
 #define P_DRGAB BETTER_DRAG_ACTION_B_MOMENTARY
 #define P_M3SC BETTER_DRAG_SCROLL_M3
+#define P_M3TG BETTER_DRAG_SCROLL_M3_TOGGLE
 
 #define P_MS4FA LT(_FNA, MS_BTN4)
 #define P_MS5FB LT(_FNB, MS_BTN5)
@@ -73,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         P_DRGAA,                   KC_MPLY
     ),
     [_FNB] = LAYOUT(
-        _______, _______, _______, _______,
-        P_DPI,                     KC_NO
+        P_DPI  , _______, _______, _______,
+        P_M3TG,                    KC_NO
     ),
 };
