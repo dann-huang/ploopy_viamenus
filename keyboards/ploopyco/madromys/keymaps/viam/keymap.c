@@ -53,6 +53,8 @@ enum keymap_keycodes {
     MOR_MAN,
     MOR_DIT,
     MOR_DSH,
+    BETTER_DRAG_SCROLL_M3,
+    BETTER_DRAG_SCROLL_M3_TOGGLE,
 };
 
 enum {
@@ -61,17 +63,20 @@ enum {
 
 #include "common.c"
 
+#define P_M3SC BETTER_DRAG_SCROLL_M3
+#define P_M3TG BETTER_DRAG_SCROLL_M3_TOGGLE
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        P_MS4FA, P_MS5FB, MS_BTN3, MS_BTN2,
-        MS_BTN1,                   TD(TD_DRAGSCROLL)
+        P_M3SC,  P_SNMOA, P_MS4FA, MS_BTN1,
+        MS_BTN2,                   P_MS5FB
     ),
     [_FNA] = LAYOUT(
-        _______, PL_TSKP, PL_TSKN, _______,
-        DPI_CONFIG,                P_DRGTG
+        KC_MUTE, KC_VOLU, KC_NO,   KC_VOLD,
+        P_DGACA,                   KC_MPLY
     ),
     [_FNB] = LAYOUT(
-        _______, _______, _______, P_SNTGA,
-        PL_MSJG,                   P_DRGTG
-    )
+        P_DPI  , _______, _______, _______,
+        P_M3TG,                    KC_NO
+    ),
 };
